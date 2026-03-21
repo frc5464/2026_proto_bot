@@ -16,7 +16,7 @@ public class WhiteCommand extends Command {
     }
     @Override
     public void execute(){
-        candle.whiteIt();
+        // candle.whiteIt();
     }
 
     @Override
