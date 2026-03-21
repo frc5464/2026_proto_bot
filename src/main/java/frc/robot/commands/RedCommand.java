@@ -22,6 +22,7 @@ public class RedCommand extends Command {
 
     @Override
     public void end(boolean interrupted){
+        candle.defaultColor();
     }
 
     }

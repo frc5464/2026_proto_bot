@@ -59,8 +59,8 @@ public class RobotContainer {
     m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
     m_driverController.y().whileTrue(new RedCommand(m_candleSubsystem));
     m_driverController.x().whileTrue(new VioletStrobeCommand(m_candleSubsystem));
-    m_driverController.x().whileFalse(new WhiteCommand(m_candleSubsystem));
-    m_driverController.y().whileFalse(new WhiteCommand(m_candleSubsystem));
+    // m_driverController.x().whileFalse(new WhiteCommand(m_candleSubsystem));
+    // m_driverController.y().whileFalse(new WhiteCommand(m_candleSubsystem));
   }
 
   /**

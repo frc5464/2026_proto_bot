@@ -109,7 +109,7 @@ public class CANdleSubsystem extends SubsystemBase {
 
     }
 
-    public void whiteIt(){
+    public void defaultColor(){
         m_candle.setControl(new SolidColor(0, 7).withColor(kWhite));
     }
 
