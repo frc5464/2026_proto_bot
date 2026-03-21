@@ -62,11 +62,11 @@ public class CANdleSubsystem extends SubsystemBase {
         TwinkleOff,
     }
 
-    private AnimationType m_anim0State = AnimationType.None;
-    private AnimationType m_anim1State = AnimationType.None;
+    private AnimationType m_animState = AnimationType.None;
+    // private AnimationType m_anim1State = AnimationType.None;
 
-    private final SendableChooser<AnimationType> m_anim0Chooser = new SendableChooser<AnimationType>();
-    private final SendableChooser<AnimationType> m_anim1Chooser = new SendableChooser<AnimationType>();
+    private final SendableChooser<AnimationType> m_animChooser = new SendableChooser<AnimationType>();
+    // private final SendableChooser<AnimationType> m_animChooser = new SendableChooser<AnimationType>();
 
     /**
      * This function is run when the robot is first started up and should be used for any
@@ -91,22 +91,27 @@ public class CANdleSubsystem extends SubsystemBase {
         m_candle.setControl(new SolidColor(0, 399).withColor(kWhite));
 
         /* add animations to chooser for slot 0 */
-        m_anim0Chooser.setDefaultOption("Color Flow", AnimationType.ColorFlow);
-        m_anim0Chooser.addOption("Rainbow", AnimationType.Rainbow);
-        m_anim0Chooser.addOption("Twinkle", AnimationType.Twinkle);
-        m_anim0Chooser.addOption("Twinkle Off", AnimationType.TwinkleOff);
-        m_anim0Chooser.addOption("Fire", AnimationType.Fire);
-        m_anim0Chooser.addOption("Strobe", AnimationType.Strobe);
+        m_animChooser.setDefaultOption("Color Flow", AnimationType.ColorFlow);
+        m_animChooser.addOption("Rainbow", AnimationType.Rainbow);
+        m_animChooser.addOption("Twinkle", AnimationType.Twinkle);
+        m_animChooser.addOption("Twinkle Off", AnimationType.TwinkleOff);
+        m_animChooser.addOption("Fire", AnimationType.Fire);
+        m_animChooser.addOption("Strobe", AnimationType.Strobe);
+        m_animChooser.setDefaultOption("Larson", AnimationType.Larson);
+        m_animChooser.addOption("RGB Fade", AnimationType.RgbFade);
+        m_animChooser.addOption("Single Fade", AnimationType.SingleFade);
+        m_animChooser.addOption("Strobe", AnimationType.Strobe);
+        m_animChooser.addOption("Fire", AnimationType.Fire);
 
         /* add animations to chooser for slot 1 */
-        m_anim1Chooser.setDefaultOption("Larson", AnimationType.Larson);
-        m_anim1Chooser.addOption("RGB Fade", AnimationType.RgbFade);
-        m_anim1Chooser.addOption("Single Fade", AnimationType.SingleFade);
-        m_anim1Chooser.addOption("Strobe", AnimationType.Strobe);
-        m_anim1Chooser.addOption("Fire", AnimationType.Fire);
+        // m_anim1Chooser.setDefaultOption("Larson", AnimationType.Larson);
+        // m_anim1Chooser.addOption("RGB Fade", AnimationType.RgbFade);
+        // m_anim1Chooser.addOption("Single Fade", AnimationType.SingleFade);
+        // m_anim1Chooser.addOption("Strobe", AnimationType.Strobe);
+        // m_anim1Chooser.addOption("Fire", AnimationType.Fire);
 
-        SmartDashboard.putData("Animation 0", m_anim0Chooser);
-        SmartDashboard.putData("Animation 1", m_anim1Chooser);
+        SmartDashboard.putData("Animation", m_animChooser);
+        // SmartDashboard.putData("Animation", m_anim1Chooser);
 
     }
 
@@ -129,89 +134,121 @@ public class CANdleSubsystem extends SubsystemBase {
     }
     public void periodic() {
         /* if the selection for slot 0 changes, change animations */
-        final var anim0Selection = m_anim0Chooser.getSelected();
-        if (m_anim0State != anim0Selection) {
-            m_anim0State = anim0Selection;
+        final var animSelection = m_animChooser.getSelected();
+        if (m_animState != animSelection) {
+            m_animState = animSelection;
 
-            switch (m_anim0State) {
+            switch (m_animState) {
                 default:
                 case ColorFlow:
                     m_candle.setControl(
-                        new ColorFlowAnimation(kSlot0StartIdx, kSlot0EndIdx).withSlot(0)
+                        new ColorFlowAnimation(kSlot0StartIdx, kSlot1EndIdx).withSlot(0)
                             .withColor(kViolet)
                     );
                     break;
                 case Rainbow:
                     m_candle.setControl(
-                        new RainbowAnimation(kSlot0StartIdx, kSlot0EndIdx).withSlot(0)
+                        new RainbowAnimation(kSlot0StartIdx, kSlot1EndIdx).withSlot(0)
                     );
                     break;
                 case Twinkle:
                     m_candle.setControl(
-                        new TwinkleAnimation(kSlot0StartIdx, kSlot0EndIdx).withSlot(0)
+                        new TwinkleAnimation(kSlot0StartIdx, kSlot1EndIdx).withSlot(0)
                             .withColor(kViolet)
                     );
                     break;
                 case Strobe:
                     m_candle.setControl(
-                        new StrobeAnimation(kSlot0StartIdx, kSlot0EndIdx).withSlot(0).withColor(kRed)
+                        new StrobeAnimation(kSlot0StartIdx, kSlot1EndIdx).withSlot(0).withColor(kRed)
                     );
                     break;
                 case TwinkleOff:
                     m_candle.setControl(
-                        new TwinkleOffAnimation(kSlot0StartIdx, kSlot0EndIdx).withSlot(0)
+                        new TwinkleOffAnimation(kSlot0StartIdx, kSlot1EndIdx).withSlot(0)
                             .withColor(kViolet)
                     );
                     break;
                 case Fire:
                     m_candle.setControl(
-                        new FireAnimation(kSlot0StartIdx, kSlot0EndIdx).withSlot(0)
+                        new FireAnimation(kSlot0StartIdx, kSlot1EndIdx).withSlot(0)
                     );
                     break;
-            }
-        }
-
-        /* if the selection for slot 1 changes, change animations */
-        final var anim1Selection = m_anim1Chooser.getSelected();
-        if (m_anim1State != anim1Selection) {
-            m_anim1State = anim1Selection;
-
-            switch (m_anim1State) {
-                default:
-                case Larson:
+                       case Larson:
                     m_candle.setControl(
-                        new LarsonAnimation(kSlot1StartIdx, kSlot1EndIdx).withSlot(1)
+                        new LarsonAnimation(kSlot0StartIdx, kSlot1EndIdx).withSlot(1)
                             .withColor(kRed)
                     );
                     break;
                 case RgbFade:
                     m_candle.setControl(
-                        new RgbFadeAnimation(kSlot1StartIdx, kSlot1EndIdx).withSlot(1)
+                        new RgbFadeAnimation(kSlot0StartIdx, kSlot1EndIdx).withSlot(1)
                     );
                     break;
                 case SingleFade:
                     m_candle.setControl(
-                        new SingleFadeAnimation(kSlot1StartIdx, kSlot1EndIdx).withSlot(1)
+                        new SingleFadeAnimation(kSlot0StartIdx, kSlot1EndIdx).withSlot(1)
                             .withColor(kRed)
                     );
                     break;
-                case Strobe:
-                    m_candle.setControl(
-                        new StrobeAnimation(kSlot1StartIdx, kSlot1EndIdx).withSlot(1)
-                            .withColor(kRed)
-                    );
-                    break;
-                case Fire:
-                    /* direction can be reversed by either the Direction parameter or switching start and end */
-                    m_candle.setControl(
-                        new FireAnimation(kSlot1StartIdx, kSlot1EndIdx).withSlot(1)
-                            .withDirection(AnimationDirectionValue.Backward)
-                            .withCooling(0.4)
-                            .withSparking(0.5)
-                    );
-                    break;
+                // case Strobe:
+                //     m_candle.setControl(
+                //         new StrobeAnimation(kSlot0StartIdx, kSlot1EndIdx).withSlot(1)
+                //             .withColor(kRed)
+                //     );
+                //     break;
+                // case Fire:
+                //     /* direction can be reversed by either the Direction parameter or switching start and end */
+                //     m_candle.setControl(
+                //         new FireAnimation(kSlot0StartIdx, kSlot1EndIdx).withSlot(1)
+                //             .withDirection(AnimationDirectionValue.Backward)
+                //             .withCooling(0.4)
+                //             .withSparking(0.5)
+                //     );
+                //     break;
             }
         }
+
+        /* if the selection for slot 1 changes, change animations */
+        // final var anim1Selection = m_anim1Chooser.getSelected();
+        // if (m_anim1State != anim1Selection) {
+        //     m_anim1State = anim1Selection;
+
+        //     switch (m_anim1State) {
+        //         default:
+        //         case Larson:
+        //             m_candle.setControl(
+        //                 new LarsonAnimation(kSlot1StartIdx, kSlot1EndIdx).withSlot(1)
+        //                     .withColor(kRed)
+        //             );
+        //             break;
+        //         case RgbFade:
+        //             m_candle.setControl(
+        //                 new RgbFadeAnimation(kSlot1StartIdx, kSlot1EndIdx).withSlot(1)
+        //             );
+        //             break;
+        //         case SingleFade:
+        //             m_candle.setControl(
+        //                 new SingleFadeAnimation(kSlot1StartIdx, kSlot1EndIdx).withSlot(1)
+        //                     .withColor(kRed)
+        //             );
+        //             break;
+        //         case Strobe:
+        //             m_candle.setControl(
+        //                 new StrobeAnimation(kSlot1StartIdx, kSlot1EndIdx).withSlot(1)
+        //                     .withColor(kRed)
+        //             );
+        //             break;
+        //         case Fire:
+        //             /* direction can be reversed by either the Direction parameter or switching start and end */
+        //             m_candle.setControl(
+        //                 new FireAnimation(kSlot1StartIdx, kSlot1EndIdx).withSlot(1)
+        //                     .withDirection(AnimationDirectionValue.Backward)
+        //                     .withCooling(0.4)
+        //                     .withSparking(0.5)
+        //             );
+        //             break;
+        //     }
+        // }
     }
 
     // @Override
