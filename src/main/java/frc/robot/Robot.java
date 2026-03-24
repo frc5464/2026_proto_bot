@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.CANdleSubsystem;
+import frc.robot.subsystems.SwerveSubsystem;
 
 /**
  * The methods in this class are called automatically corresponding to each mode, as described in
@@ -19,6 +20,7 @@ public class Robot extends TimedRobot {
 
   private final RobotContainer m_robotContainer;
   private final CANdleSubsystem m_caNdleSubsystem;
+  private final SwerveSubsystem m_SwerveSubsystem;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -29,6 +31,7 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     m_caNdleSubsystem = new CANdleSubsystem();
+    m_SwerveSubsystem = new SwerveSubsystem();
   }
 
   /**
@@ -41,6 +44,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     m_caNdleSubsystem.periodic();
+    m_SwerveSubsystem.periodic();
     // m_caNdleSubsystem.defaultColor();
     // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
     // commands, running already-scheduled commands, removing finished or interrupted commands,
