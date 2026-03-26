@@ -147,51 +147,51 @@ public class CANdleSubsystem extends SubsystemBase {
                 default:
                 case ColorFlow:
                     m_candle.setControl(
-                        new ColorFlowAnimation(kSlot0StartIdx, kSlot1EndIdx).withSlot(0)
+                        new ColorFlowAnimation(kSlotStartIdx, kSlotEndIdx).withSlot(0)
                             .withColor(kViolet)
                     );
                     break;
                 case Rainbow:
                     m_candle.setControl(
-                        new RainbowAnimation(kSlot0StartIdx, kSlot1EndIdx).withSlot(0)
+                        new RainbowAnimation(kSlotStartIdx, kSlotEndIdx).withSlot(0)
                     );
                     break;
                 case Twinkle:
                     m_candle.setControl(
-                        new TwinkleAnimation(kSlot0StartIdx, kSlot1EndIdx).withSlot(0)
+                        new TwinkleAnimation(kSlotStartIdx, kSlotEndIdx).withSlot(0)
                             .withColor(kViolet)
                     );
                     break;
                 case Strobe:
                     m_candle.setControl(
-                        new StrobeAnimation(kSlot0StartIdx, kSlot1EndIdx).withSlot(0).withColor(kRed)
+                        new StrobeAnimation(kSlotStartIdx, kSlotEndIdx).withSlot(0).withColor(kRed)
                     );
                     break;
                 case TwinkleOff:
                     m_candle.setControl(
-                        new TwinkleOffAnimation(kSlot0StartIdx, kSlot1EndIdx).withSlot(0)
+                        new TwinkleOffAnimation(kSlotStartIdx, kSlotEndIdx).withSlot(0)
                             .withColor(kViolet)
                     );
                     break;
                 case Fire:
                     m_candle.setControl(
-                        new FireAnimation(kSlot0StartIdx, kSlot1EndIdx).withSlot(0)
+                        new FireAnimation(kSlotStartIdx, kSlotEndIdx).withSlot(0)
                     );
                     break;
                 case Larson:
                     m_candle.setControl(
-                        new LarsonAnimation(kSlot0StartIdx, kSlot1EndIdx).withSlot(1)
+                        new LarsonAnimation(kSlotStartIdx, kSlotEndIdx).withSlot(1)
                             .withColor(kRed)
                     );
                     break;
                 case RgbFade:
                     m_candle.setControl(
-                        new RgbFadeAnimation(kSlot0StartIdx, kSlot1EndIdx).withSlot(1)
+                        new RgbFadeAnimation(kSlotStartIdx, kSlotEndIdx).withSlot(1)
                     );
                     break;
                 case SingleFade:
                     m_candle.setControl(
-                        new SingleFadeAnimation(kSlot0StartIdx, kSlot1EndIdx).withSlot(1)
+                        new SingleFadeAnimation(kSlotStartIdx, kSlotEndIdx).withSlot(1)
                             .withColor(kRed)
                     );
                     break;}
