@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.CANdleSubsystem;
+import frc.robot.subsystems.SwerveSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to each mode, as
@@ -24,6 +25,7 @@ public class Robot extends TimedRobot
 
   private RobotContainer m_robotContainer;
   private CANdleSubsystem m_CaNdleSubsystem;
+  private SwerveSubsystem m_SwerveSubsystem;
 
   private Timer disabledTimer;
 
@@ -46,6 +48,7 @@ public class Robot extends TimedRobot
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+    m_SwerveSubsystem = new SwerveSubsystem();
     m_CaNdleSubsystem = new CANdleSubsystem();
 
     // Create a timer to disable motor brake a few seconds after disable.  This will let the robot stop
@@ -68,6 +71,7 @@ public class Robot extends TimedRobot
   @Override
   public void robotPeriodic()
   {
+    m_SwerveSubsystem.periodic();
     // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
     // commands, running already-scheduled commands, removing finished or interrupted commands,
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
@@ -81,7 +85,6 @@ public class Robot extends TimedRobot
   @Override
   public void disabledInit()
   {
-    m_robotContainer.setMotorBrake(true);
     disabledTimer.reset();
     disabledTimer.start();
   }
@@ -91,7 +94,6 @@ public class Robot extends TimedRobot
   {
     if (disabledTimer.hasElapsed(Constants.DrivebaseConstants.WHEEL_LOCK_TIME))
     {
-      m_robotContainer.setMotorBrake(false);
       disabledTimer.stop();
       disabledTimer.reset();
     }
@@ -103,7 +105,6 @@ public class Robot extends TimedRobot
   @Override
   public void autonomousInit()
   {
-    m_robotContainer.setMotorBrake(true);
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     //Print the selected autonomous command upon autonomous init
