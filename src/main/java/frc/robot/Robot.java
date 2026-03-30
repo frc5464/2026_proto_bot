@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.CANdleSubsystem;
@@ -29,10 +30,9 @@ public class Robot extends TimedRobot
 
   private Timer disabledTimer;
 
-  public Robot()
-  {
-    instance = this;
-  }
+  // public Robot(){
+
+  // }
 
   public static Robot getInstance()
   {
@@ -42,14 +42,15 @@ public class Robot extends TimedRobot
   /**
    * This function is run when the robot is first started up and should be used for any initialization code.
    */
-  @Override
-  public void robotInit()
-  {
+  // @Override
+  public Robot(){
+
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     m_SwerveSubsystem = new SwerveSubsystem();
     m_CaNdleSubsystem = new CANdleSubsystem();
+    SmartDashboard.putData("Auto Mode", m_robotContainer.autoChooser);
 
     // Create a timer to disable motor brake a few seconds after disable.  This will let the robot stop
     // immediately when disabled, but then also let it be pushed more 
@@ -108,7 +109,7 @@ public class Robot extends TimedRobot
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     //Print the selected autonomous command upon autonomous init
-    System.out.println("Auto selected: " + m_autonomousCommand);
+    // System.out.println("Auto selected: " + m_autonomousCommand);
 
     // schedule the autonomous command selected in the autoChooser
     if (m_autonomousCommand != null)
@@ -126,18 +127,13 @@ public class Robot extends TimedRobot
   }
 
   @Override
-  public void teleopInit()
-  {
+  public void teleopInit() {
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    if (m_autonomousCommand != null)
-    {
-      m_autonomousCommand.cancel();
-    } else
-    {
-      CommandScheduler.getInstance().cancelAll();
+    if (m_autonomousCommand != null){
+      CommandScheduler.getInstance().cancel(m_autonomousCommand);
     }
   }
 
@@ -145,8 +141,7 @@ public class Robot extends TimedRobot
    * This function is called periodically during operator control.
    */
   @Override
-  public void teleopPeriodic()
-  {
+  public void teleopPeriodic() {
   }
 
   @Override

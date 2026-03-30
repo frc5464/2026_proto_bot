@@ -17,18 +17,20 @@ import frc.robot.commands.SlowModeCommand;
 import frc.robot.subsystems.SwerveSubsystem;
 
 public class RobotContainer {
-  private final SendableChooser<Command> autoChooser;
 
   public SwerveSubsystem swerve = new SwerveSubsystem();
   
   private final CommandJoystick driveController = new CommandJoystick(0);
   
+  public final SendableChooser<Command> autoChooser;
+
   public RobotContainer() {
 
     autoChooser = AutoBuilder.buildAutoChooser(); // Default auto will be `Commands.none()`
     SmartDashboard.putData("Auto Mode", autoChooser); 
     
     FollowPathCommand.warmupCommand();
+    
     configureBindings();
 
     //controller deadband for drive controller

@@ -53,7 +53,7 @@ public class SwerveSubsystem extends SubsystemBase{
             throw new RuntimeException(e);
             }
 
-            setupPhotonVision();
+            // setupPhotonVision();
             setupPathPlanner();
     }
 
@@ -107,10 +107,10 @@ public class SwerveSubsystem extends SubsystemBase{
   /**
    * Setup the photon vision class.
    */
-  public void setupPhotonVision()
-  {
-    vision = new VisionSubsystem(swerveDrive::getPose, swerveDrive.field);
-  }
+  // public void setupPhotonVision()
+  // {
+  //   vision = new VisionSubsystem(swerveDrive::getPose, swerveDrive.field);
+  // }
 
   /**
    * Aim the robot at the target returned by PhotonVision.
@@ -163,10 +163,9 @@ public class SwerveSubsystem extends SubsystemBase{
   {
     // Load the RobotConfig from the GUI settings. You should probably
     // store this in your Constants file
-    RobotConfig config;
-    try
-    {
-      config = RobotConfig.fromGUISettings();
+    // RobotConfig config;
+    try {
+      var config = RobotConfig.fromGUISettings();
 
       final boolean enableFeedforward = true;
       // Configure AutoBuilder last
@@ -224,7 +223,7 @@ public class SwerveSubsystem extends SubsystemBase{
 
     //Preload PathPlanner Path finding
     // IF USING CUSTOM PATHFINDER ADD BEFORE THIS LINE
-    PathfindingCommand.warmupCommand().schedule();
+    // PathfindingCommand.warmupCommand().schedule();
   }
 
   /**
