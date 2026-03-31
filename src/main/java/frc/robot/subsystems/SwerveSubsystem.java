@@ -66,12 +66,12 @@ public class SwerveSubsystem extends SubsystemBase{
         SmartDashboard.putNumber("FR Enc", modules[1].getAbsolutePosition());
         SmartDashboard.putNumber("BL Enc", modules[2].getAbsolutePosition());
         SmartDashboard.putNumber("BR Enc", modules[3].getAbsolutePosition());
-      // When vision is enabled we must manually update odometry in SwerveDrive
-      if (visionDriveTest)
-      {
-        swerveDrive.updateOdometry();
-        vision.updatePoseEstimation(swerveDrive);
-      }
+      // // When vision is enabled we must manually update odometry in SwerveDrive
+      // if (visionDriveTest)
+      // {
+      //   swerveDrive.updateOdometry();
+      //   vision.updatePoseEstimation(swerveDrive);
+      // }
     }
 
     public void drive(double x, double y, double z){

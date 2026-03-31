@@ -26,7 +26,7 @@ public class Robot extends TimedRobot
 
   private RobotContainer m_robotContainer;
   private CANdleSubsystem m_CaNdleSubsystem;
-  private SwerveSubsystem m_SwerveSubsystem;
+  // private SwerveSubsystem m_SwerveSubsystem;
 
   private Timer disabledTimer;
 
@@ -48,7 +48,7 @@ public class Robot extends TimedRobot
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    m_SwerveSubsystem = new SwerveSubsystem();
+    // m_SwerveSubsystem = new SwerveSubsystem();
     m_CaNdleSubsystem = new CANdleSubsystem();
     // SmartDashboard.putData("Auto Mode", m_robotContainer.autoChooser);
 
@@ -77,7 +77,7 @@ public class Robot extends TimedRobot
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-    m_SwerveSubsystem.periodic();
+    // m_SwerveSubsystem.periodic();
     m_robotContainer.periodic();
   }
 

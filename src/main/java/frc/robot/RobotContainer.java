@@ -44,7 +44,7 @@ public class RobotContainer {
   }
 
   public void periodic(){
-
+    swerve.periodic();
   }
 
   public void configureBindings(){
